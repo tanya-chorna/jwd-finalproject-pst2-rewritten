@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Cat Tasker</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="resources/css/style.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+</head>
+
+<!--After the page was loaded 'initialPage' function is called-->
+<body onload="initialPage()">
+  <div class="container">
+    <!--Header-->
+    <div class="row">
+      <div class="col text-center">  
+      <img class="img-fluid" src="resources/img/cat11.jpg" alt="top-banner">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+
+    <div class="row pt-3"> 
+      <h1>New Task</h1>
+    </div>
+
+    <!--Sets form need to be validated. Shows errors if any field is empty-->
+    <form class="was-validated">
+
+      <!--Name element-->
+      <div class="row pt-3"> 
+        <h3>Name:</h3>
+        <textarea type="text" class="form-control"  rows="1" id="name" required></textarea>
+        <!--Validation messages-->
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div> 
+
+      <!--Description element-->
+      <div class="row pt-3"> 
+        <h3>Description:</h3>
+        <textarea class="form-control" rows="5" id="description" required></textarea>
+        <!--Validation messages-->
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div> 
+    
+        
+      <!--Assign to: and Due By: elements-->
+      <div class="row pt-3">
+        <div class="col text-left p-0 pr-2"> 
+          <h3>Assigned to:</h3>
+        </div>
+        <div class="col text-left p-0 pl-2"> 
+          <h3>Due By:</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col text-left p-0 pr-2">
+          <div class="form-group">
+            <select class="form-control" id="person" required>
+              <!--Default option-->
+              <option selected value="">Select User</option>
+              <!--Dropdown options-->
+              <option>Tetiana "Cat" Chorna</option>
+              <option>Michael "Maine Coon" Simms</option>
+              <option>Yared "Ocelot" Nigatu</option>
+              <option>Jenna "Jaguar" Sosa</option>
+              <option>Kathryn "Wildcat" Williams</option>
+            </select>
+            <!--Validation Messages-->
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>
+        </div>
+
+        <!--Datepicker-->
+        <div class="col p-0 pl-2">
+          <input id="datepicker" required width="100%">
+          <script>
+          $('#datepicker').datepicker({
+          uiLibrary: 'bootstrap4'
+          });
+          </script>
+        </div>
+      </div> 
+
+      <!--Shows alert if there is any empty field in the form (activated by saveTask function)
+      (performs second validation, first one is performed by bootstrap)-->
+      <div class="row pt-4" >
+        <span style="width:100%" id="alertm"></span>
+      </div>
+
+     
+
+    </form>
+
+     <!--'Add Task' Button. Activates 'saveTask' function-->
+     <div class="row"> 
+      <button type="button" class="btn btn-info btn-lg btn-block" id="addTaskButton" onclick="saveTask('open')">Add Task</button>
+    </div>
+
+  </div>
+  <div class="col-md-7 pl-5">
+    <!--Card Row for Open Tasks-->
+    <div class="row pt-3 pl-2">
+      <h1 class="text-danger">Open Tasks:</h1>
+    </div>
+    <!--Here will be added a single string with HTML code for non-closed tasks from 'saveTask' function after click on 'Add Task'-->
+    <div class="row" id="openTasks"></div>
+      
+    <!--Card Deck for Closed Tasks-->
+    <div class="row pt-3 pl-2">
+      <h1 class="text-success">Closed Tasks:</h1>
+    </div>
+    <!--Here will be added a single string with HTML code for closed tasks 'saveTask' function after click on 'Add Task' -->
+    <div class="row" id="closedTasks"></div>
+
+  </div>
+</div>
+          
+    <!--Footer-->
+    <div class="row pt-3">
+      <div class="col text-center"><img class="mw-100" src="resources/img/cat22.jpg" class="img-responsive">
+        <div class="carousel-caption">
+          <p><small class="text-dark font-weight-bold">Final Project for </small><a href="https://usa.generation.org/dc/junior-web-developer/" target="_blank" class="badge badge-light">Generation USA Jr. Web Developer Bootcamp</a></p>
+          <p><small class="text-dark font-weight-bold">Work by: </small> 
+            <a href="https://www.linkedin.com/in/tetiana-chorna-069bab112/" target="_blank" class="badge badge-light">Tetiana Chorna</a>&nbsp;|
+            <a href="https://www.linkedin.com/in/yared-nigatu-731044b8/" target="_blank" class="badge badge-light">Yared Nigatu</a>&nbsp;|
+            <a href="https://www.linkedin.com/in/jenna-sosa/" target="_blank" class="badge badge-light">Jenna Sosa</a>&nbsp;|
+            <a href="https://www.linkedin.com/in/michael-simms-11318b201/" target="_blank" class="badge badge-light">Michael Simms</a>&nbsp;|
+           <a href="https://www.linkedin.com/in/kathrynwilliams95/" target="_blank" class="badge badge-light">Kathryn Williams</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/index.js"></script> 
+  <script src="js/taskManager.js"></script> 
+</body>
+</html>
